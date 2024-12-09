@@ -1,0 +1,61 @@
+classDiagram
+  class AppComponent {
+    +navbar: NavbarComponent
+    +routerOutlet: RouterOutlet
+  }
+
+  class LoginComponent {
+    +loginForm: FormGroup
+    +onSubmit(): void
+  }
+
+  class AddTourComponent {
+    +addTourForm: FormGroup
+    +onSubmit(): void
+    +addDestination(): void
+    +removeDestination(index: number): void
+  }
+
+  class EditTourComponent {
+    +editTourForm: FormGroup
+    +onSubmit(): void
+    +populateForm(): void
+  }
+
+  class TourHistoryComponent {
+    +completedTours: Tour[]
+    +ngOnInit(): void
+  }
+
+  class TourListComponent {
+    +tours: Tour[]
+    +ngOnInit(): void
+    +viewTourDetails(tourId: string): void
+    +onEditTour(tourId: string): void
+    +onDeleteTour(tourId: string): void
+  }
+
+  class TourService {
+    +getTours(): Observable~Tour[]~
+    +createTour(tour: Tour): Observable~Tour~
+    +getTourById(id: string): Observable~Tour~
+    +updateTour(id: string, tour: Tour): Observable~Tour~
+    +deleteTour(id: string): Observable~string~
+  }
+
+  class AuthService {
+    +login(email: string, password: string): Observable~token~
+    +isLoggedIn(): boolean
+    +logout(): void
+  }
+
+  AppComponent --> LoginComponent
+  AppComponent --> AddTourComponent
+  AppComponent --> EditTourComponent
+  AppComponent --> TourHistoryComponent
+  AppComponent --> TourListComponent
+  TourListComponent --> TourService
+  AddTourComponent --> TourService
+  EditTourComponent --> TourService
+  TourHistoryComponent --> TourService
+  LoginComponent --> AuthService

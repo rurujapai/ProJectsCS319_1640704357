@@ -1,0 +1,24 @@
+<div class="container tour-history">
+  <h2>Tour History</h2>
+  <div *ngIf="completedTours.length > 0; else noTours">
+    <div *ngFor="let tour of completedTours" class="tour-item">
+      <h3>{{ tour.name }}</h3>
+      <p><strong>Start Date:</strong> {{ tour.startDate | dateFormat }}</p>
+      <p><strong>End Date:</strong> {{ tour.endDate | dateFormat }}</p>
+      <p><strong>Description:</strong> {{ tour.description }}</p>
+      <div *ngIf="tour.destinations && tour.destinations.length > 0">
+        <p><strong>Destinations:</strong></p>
+        <ul>
+          <li *ngFor="let destination of tour.destinations">
+            <strong>City:</strong> {{ destination.city }} - <strong>Days:</strong> {{ destination.days }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <ng-template #noTours>
+    <p>No tours have been completed yet.</p>
+  </ng-template>
+</div>
+
+  

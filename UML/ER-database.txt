@@ -1,0 +1,35 @@
+erDiagram
+    User {
+        INTEGER id PK
+        STRING name
+        STRING email
+        STRING password
+        ENUM role "admin, customer"
+        TIMESTAMP createdAt
+        TIMESTAMP updatedAt
+    }
+
+    Tour {
+        INTEGER id PK
+        STRING name
+        STRING description
+        DATE startDate
+        DATE endDate
+        ENUM status "planned, completed"
+        INTEGER userId FK
+        TIMESTAMP createdAt
+        TIMESTAMP updatedAt
+    }
+
+    Destination {
+        INTEGER id PK
+        STRING city
+        JSON activities
+        INTEGER days
+        INTEGER tourId FK
+        TIMESTAMP createdAt
+        TIMESTAMP updatedAt
+    }
+
+    User ||--o{ Tour : "has many"
+    Tour ||--o{ Destination : "includes"

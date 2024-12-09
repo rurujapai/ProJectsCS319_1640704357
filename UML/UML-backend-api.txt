@@ -1,0 +1,44 @@
+classDiagram
+  class User {
+    +id: INTEGER
+    +name: STRING
+    +email: STRING
+    +password: STRING
+    +role: ENUM('admin', 'customer')
+  }
+
+  class Tour {
+    +id: INTEGER
+    +name: STRING
+    +description: STRING
+    +startDate: DATE
+    +endDate: DATE
+    +status: ENUM('planned', 'completed')
+  }
+
+  class Destination {
+    +id: INTEGER
+    +city: STRING
+    +activities: JSON
+    +days: INTEGER
+    +tourId: INTEGER
+  }
+
+  class AuthController {
+    +login(email: STRING, password: STRING): TOKEN
+  }
+
+  class TourController {
+    +getTours(): Tour[]
+    +createTour(tour: Tour): Tour
+    +getTourById(id: INTEGER): Tour
+    +updateTour(id: INTEGER, tour: Tour): Tour
+    +deleteTour(id: INTEGER): void
+  }
+
+
+  User "1" <-- "*" Tour : "Manages"
+  Tour "1" --> "*" Destination : "Includes"
+  AuthController --> User : "Authenticates"
+  TourController --> Tour
+  TourController --> Destination

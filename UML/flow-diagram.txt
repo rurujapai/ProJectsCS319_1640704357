@@ -1,0 +1,35 @@
+graph TD
+  subgraph User
+    A1[User's Browser]
+    A2[Login Request]
+    A3[Token Stored in LocalStorage]
+  end
+
+  subgraph Frontend
+    B1[Angular Application]
+    B3[HTTP Interceptor adds JWT to API requests]
+  end
+
+  subgraph Backend
+    C1[Node.js + Express.js]
+    C2[Auth Routes]
+    C3[Tour Routes]
+    C4[JWT Middleware validates token]
+    C5[Token issued on login]
+  end
+
+  subgraph Database
+    D1[MySQL Database]
+  end
+
+  %% Relationships
+  A1 --> |"Enter email & password"| A2
+  A2 --> |"POST /auth/login"| C2
+  C2 --> |"Validate credentials"| D1
+  D1 --> |"User exists: Issue JWT"| C5
+  C5 --> |"JWT Token"| A3
+  A3 --> |"Stored token used in API calls"| B3
+  B3 --> |"Include JWT in Authorization Header"| C4
+  C4 --> |"Validate JWT token"| C3
+  C3 --> |"Authorized API actions"| D1
+  D1 --> |"CRUD Operations"| C3

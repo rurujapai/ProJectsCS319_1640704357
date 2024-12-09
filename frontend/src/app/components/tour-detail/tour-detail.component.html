@@ -1,0 +1,29 @@
+<div class="container tour-detail">
+    <h2>Tour Details</h2>
+  
+    <div *ngIf="tour">
+      <h3>{{ tour.name }}</h3>
+      <p><strong>Description:</strong> {{ tour.description }}</p>
+      <p><strong>Start Date:</strong> {{ tour.startDate | dateFormat:'longDate' }}</p>
+      <p><strong>End Date:</strong> {{ tour.endDate | dateFormat:'longDate' }}</p>
+      <p><strong>Status:</strong> {{ tour.status }}</p>
+  
+      <div *ngIf="tour.destinations && tour.destinations.length > 0">
+        <h4>Destinations:</h4>
+        <ul>
+          <li *ngFor="let destination of tour.destinations">
+            <strong>City:</strong> {{ destination.city }}<br />
+            <strong>Activities:</strong> {{ destination.activities }}<br />
+            <strong>Days:</strong> {{ destination.days }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  
+    <div *ngIf="!tour">
+      <p>Loading tour details...</p>
+    </div>
+  
+    <button (click)="goBack()">Back to Tours</button>
+  </div>
+  

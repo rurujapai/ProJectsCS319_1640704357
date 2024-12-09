@@ -1,0 +1,31 @@
+graph TD
+  subgraph Frontend
+    A1[Angular App]
+    A2[Login Page]
+    A3[Add/Edit Tour Pages]
+    A4[Tour History Page]
+  end
+
+  subgraph Backend
+    B1[Node.js Server]
+    B2[Auth Routes]
+    B3[Tour Routes]
+    B4[User Routes]
+    B5[Controllers]
+  end
+
+  subgraph Database
+    C1[(MySQL Database)]
+    C2[User Table]
+    C3[Tour Table]
+    C4[Destination Table]
+  end
+
+  A1 --> |REST API| B1
+  B1 --> C1
+  B2 --> B5
+  B3 --> B5
+  B4 --> B5
+  C1 --> |Data Storage| C2
+  C1 --> |Data Storage| C3
+  C1 --> |Data Storage| C4

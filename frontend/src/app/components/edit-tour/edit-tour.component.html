@@ -1,0 +1,58 @@
+<div class="container edit-tour">
+  <h2>Edit Tour</h2>
+
+  <form [formGroup]="editTourForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Name:</label>
+      <input id="name" formControlName="name" type="text" />
+      <div *ngIf="editTourForm.get('name')?.invalid && editTourForm.get('name')?.touched">
+        Name is required.
+      </div>
+    </div>
+
+    <div>
+      <label for="description">Description:</label>
+      <textarea id="description" formControlName="description"></textarea>
+      <div *ngIf="editTourForm.get('description')?.invalid && editTourForm.get('description')?.touched">
+        Description is required.
+      </div>
+    </div>
+
+    <div>
+      <label for="startDate">Start Date:</label>
+      <input id="startDate" formControlName="startDate" type="date" />
+      <div *ngIf="editTourForm.get('startDate')?.invalid && editTourForm.get('startDate')?.touched">
+        Start Date is required.
+      </div>
+    </div>
+
+    <div>
+      <label for="endDate">End Date:</label>
+      <input id="endDate" formControlName="endDate" type="date" />
+      <div *ngIf="editTourForm.get('endDate')?.invalid && editTourForm.get('endDate')?.touched">
+        End Date is required.
+      </div>
+    </div>
+
+    <div formArrayName="destinations">
+      <h3>Destinations</h3>
+      <div *ngFor="let destination of destinations.controls; let i = index" [formGroupName]="i">
+        <label for="city-{{ i }}">City:</label>
+        <select id="city-{{ i }}" formControlName="city">
+          <option *ngFor="let city of cities" [value]="city" [selected]="city === destination.value.index">{{ city }}</option>
+        </select>
+
+        <label for="activities-{{ i }}">Activities:</label>
+        <input id="activities-{{ i }}" formControlName="activities" type="text" placeholder="Enter activities separated by commas" />
+
+        <label for="days-{{ i }}">Days:</label>
+        <input id="days-{{ i }}" formControlName="days" type="number" />
+        <br>
+        <button type="button" (click)="removeDestination(i)">Remove Destination</button>
+      </div>
+    </div>
+    <button type="button" style="margin-right: 10px;" (click)="addDestination()">Add Destination</button>
+
+    <button type="submit" [disabled]="editTourForm.invalid">Update Tour</button>
+  </form>
+</div>

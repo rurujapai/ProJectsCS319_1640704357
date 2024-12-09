@@ -1,0 +1,17 @@
+<nav class="navbar">
+  <div class="container">
+    <div class="navbar-title">
+      <a routerLink="/">Tour Management</a>
+    </div>
+    <ul class="navbar-list">
+      <li><a routerLink="/">Home</a></li>
+      <li *ngIf="isLoggedIn"><a routerLink="/add-tour" >Add Tour</a></li>
+      <li *ngIf="isLoggedIn"><a routerLink="/tour-history" >Tour History</a></li>
+      <li *ngIf="isLoggedIn">
+        <a  class="logout-button" (click)="logout()">Logout</a>
+      </li>
+      <li *ngIf="!isLoggedIn" ><a routerLink="/login">Login</a></li>
+    </ul>
+  </div>
+</nav>
+<router-outlet></router-outlet>

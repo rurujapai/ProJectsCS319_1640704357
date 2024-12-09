@@ -1,0 +1,19 @@
+<div class="container tour-list">
+  <h2>Available Tours</h2>
+  <div *ngFor="let tour of tours" class="tour-item">
+    <h3 (click)="viewTourDetails(tour.id || '')">{{ tour.name }}</h3>
+    <p><strong>Start Date:</strong> {{ tour.startDate | dateFormat }}</p>
+    <p><strong>End Date:</strong> {{ tour.endDate | dateFormat }}</p>
+    <p><strong>Description:</strong> {{ tour.description }}</p>
+    <div *ngIf="tour.destinations && tour.destinations.length > 0">
+      <p><strong>Destinations:</strong></p>
+      <ul>
+        <li *ngFor="let destination of tour.destinations">
+          <strong>City:</strong> {{ destination.city }} - <strong>Days:</strong> {{ destination.days }}
+        </li>
+      </ul>
+    </div>
+    <button style="margin-right: 5px;" (click)="onEditTour(tour.id || '')">Edit</button>
+    <button (click)="onDeleteTour(tour.id || '')">Delete</button>
+  </div>
+</div>
